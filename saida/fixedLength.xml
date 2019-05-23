@@ -1,0 +1,15 @@
+<Player>
+  <name>Sachin Tendulkar</name>
+  <debutDate>1989-09-10</debutDate>
+  <country>INDIA</country>
+  <matchesPlayed>140</matchesPlayed>
+  <runsScored>49600</runsScored>
+  <averageRunRate>64.54</averageRunRate>
+  <strikeRate>40.54</strikeRate>
+  <batingPosition>4</batingPosition>
+  <retirementDate>2012-09-01</retirementDate>
+  <address>
+    <name>Rua Indianes</name>
+    <cep>02308100</cep>
+  </address>
+</Player>

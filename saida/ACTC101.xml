@@ -1,0 +1,21 @@
+<ACTC101>
+  <Grupo_ACTC101_Portldd>
+    <IdentdPartAdmdo>123456789</IdentdPartAdmdo>
+    <NumCtrlIF>12345</NumCtrlIF>
+    <Grupo_ACTC101_IdentdContrto>
+      <CodContrtoOr>777</CodContrtoOr>
+      <CNPJBase_IFOrContrto>123456</CNPJBase_IFOrContrto>
+      <tpContrto>202</tpContrto>
+      <tpEnteCons>1</tpEnteCons>
+      <cnpjCorrespBanc>456678</cnpjCorrespBanc>
+    </Grupo_ACTC101_IdentdContrto>
+    <Grupo_ACTC101_Cli>
+      <TpCli>F</TpCli>
+      <CNPJ_CPFCli/>
+      <NomCli>Sachin Tendulkar</NomCli>
+      <TelCli>12313</TelCli>
+    </Grupo_ACTC101_Cli>
+    <Grupo_ACTC101_PropPortldd/>
+    <Grupo_ACTC101_EndCartaPortldd/>
+  </Grupo_ACTC101_Portldd>
+</ACTC101>
