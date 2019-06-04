@@ -2,58 +2,67 @@ package br.com.camelspring.bean.actc101;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-@JacksonXmlRootElement(localName = "Grupo_ACTC101_IdentdContrto")
 @JsonPropertyOrder({"codContrtoOr", "cnpjBaseIFOrContrto", "tpContrto", "tpEnteCons", "cnpjCorrespBanc"})
 public class GrupoIdentificadorContrato {
 
     @JacksonXmlProperty(localName = "CodContrtoOr")
-    private Integer codContrtoOr;
+    private String codContrtoOr;
 
     @JacksonXmlProperty(localName = "CNPJBase_IFOrContrto")
-    private Integer cnpjBaseIFOrContrto;
-    private Integer tpContrto;
-    private Integer tpEnteCons;
-    private Integer cnpjCorrespBanc;
+    private String cnpjBaseIFOrContrto;
+    private String tpContrto;
+    private String tpEnteCons;
+    private String cnpjCorrespBanc;
 
-    public Integer getCodContrtoOr() {
+    public String getCodContrtoOr() {
         return codContrtoOr;
     }
 
-    public void setCodContrtoOr(Integer codContrtoOr) {
+    public void setCodContrtoOr(String codContrtoOr) {
         this.codContrtoOr = codContrtoOr;
     }
 
-    public Integer getCnpjBaseIFOrContrto() {
+    public String getCnpjBaseIFOrContrto() {
         return cnpjBaseIFOrContrto;
     }
 
-    public void setCnpjBaseIFOrContrto(Integer cnpjBaseIFOrContrto) {
+    public void setCnpjBaseIFOrContrto(String cnpjBaseIFOrContrto) {
         this.cnpjBaseIFOrContrto = cnpjBaseIFOrContrto;
     }
 
-    public Integer getTpContrto() {
+    public String getTpContrto() {
         return tpContrto;
     }
 
-    public void setTpContrto(Integer tpContrto) {
+    public void setTpContrto(String tpContrto) {
         this.tpContrto = tpContrto;
     }
 
-    public Integer getTpEnteCons() {
+    public String getTpEnteCons() {
         return tpEnteCons;
     }
 
-    public void setTpEnteCons(Integer tpEnteCons) {
+    public void setTpEnteCons(String tpEnteCons) {
         this.tpEnteCons = tpEnteCons;
     }
 
-    public Integer getCnpjCorrespBanc() {
+    public String getCnpjCorrespBanc() {
         return cnpjCorrespBanc;
     }
 
-    public void setCnpjCorrespBanc(Integer cnpjCorrespBanc) {
+    public void setCnpjCorrespBanc(String cnpjCorrespBanc) {
         this.cnpjCorrespBanc = cnpjCorrespBanc;
+    }
+
+    @Override
+    public String toString() {
+        return "GrupoIdentificadorContrato{" +
+                "codContrtoOr=" + codContrtoOr +
+                ", cnpjBaseIFOrContrto=" + cnpjBaseIFOrContrto +
+                ", tpContrto=" + tpContrto +
+                ", tpEnteCons=" + tpEnteCons +
+                ", cnpjCorrespBanc=" + cnpjCorrespBanc +
+                '}';
     }
 }

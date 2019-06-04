@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <ACTC101>
   <Grupo_ACTC101_Portldd>
-    <IdentdPartAdmdo>123456789</IdentdPartAdmdo>
+    <IdentdPartAdmdo CodErro="EGEN0030">111</IdentdPartAdmdo>
     <NumCtrlIF>12345</NumCtrlIF>
     <Grupo_ACTC101_IdentdContrto>
       <CodContrtoOr>777</CodContrtoOr>
@@ -11,30 +12,31 @@
     </Grupo_ACTC101_IdentdContrto>
     <Grupo_ACTC101_Cli>
       <TpCli>F</TpCli>
-      <CNPJ_CPFCli/>
+      <CNPJ_CPFCli>12313</CNPJ_CPFCli>
       <NomCli>Sachin Tendulkar</NomCli>
       <TelCli>12313</TelCli>
     </Grupo_ACTC101_Cli>
-    <Grupo_ACTC101_PropPortldd/>
-    <Grupo_ACTC101_EndCartaPortldd/>
+    <Grupo_ACTC101_PropPortldd></Grupo_ACTC101_PropPortldd>
+    <Grupo_ACTC101_EndCartaPortldd></Grupo_ACTC101_EndCartaPortldd>
   </Grupo_ACTC101_Portldd>
+
   <Grupo_ACTC101_Portldd>
-    <IdentdPartAdmdo>123456789</IdentdPartAdmdo>
-    <NumCtrlIF>12345</NumCtrlIF>
+    <IdentdPartAdmdo CodErro="EGEN0030">222</IdentdPartAdmdo>
+    <NumCtrlIF>22222</NumCtrlIF>
     <Grupo_ACTC101_IdentdContrto>
-      <CodContrtoOr>777</CodContrtoOr>
-      <CNPJBase_IFOrContrto>123456</CNPJBase_IFOrContrto>
+      <CodContrtoOr>2222</CodContrtoOr>
+      <CNPJBase_IFOrContrto>2222</CNPJBase_IFOrContrto>
       <tpContrto>202</tpContrto>
       <tpEnteCons>1</tpEnteCons>
       <cnpjCorrespBanc>456678</cnpjCorrespBanc>
     </Grupo_ACTC101_IdentdContrto>
     <Grupo_ACTC101_Cli>
       <TpCli>F</TpCli>
-      <CNPJ_CPFCli/>
-      <NomCli>Sachin Tendulkar</NomCli>
+      <CNPJ_CPFCli>12313</CNPJ_CPFCli>
+      <NomCli>Joaozinho</NomCli>
       <TelCli>12313</TelCli>
     </Grupo_ACTC101_Cli>
-    <Grupo_ACTC101_PropPortldd/>
-    <Grupo_ACTC101_EndCartaPortldd/>
+    <Grupo_ACTC101_PropPortldd></Grupo_ACTC101_PropPortldd>
+    <Grupo_ACTC101_EndCartaPortldd></Grupo_ACTC101_EndCartaPortldd>
   </Grupo_ACTC101_Portldd>
-</ACTC101>
+ </ACTC101>

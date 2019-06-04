@@ -13,7 +13,7 @@ public class ProdutoService extends RouteBuilder {
                 log("${exception.message}").
                 to("mock:error");
 
-        from("file:pedidos").
+        from("direct:pedidosFile").
                 log("${body}").
                 multicast().
                 to("{{activemq.to}}").
