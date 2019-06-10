@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="ACTC101ERR"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   targetNamespace="http://www.cip-bancos.org.br/ARQ/ACTC101ERR.xsd"
+		   xmlns="http://www.cip-bancos.org.br/ARQ/ACTC101ERR.xsd"
+		   xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
+		   elementFormDefault="qualified"
+		  version="1.6.4">
+
+	<xs:include schemaLocation="ACTCTIPOS.xsd" />
+
+	<!-- Definição do arquivo -->
+	<xs:element name="ACTCDOC" type="ACTCDOCERRComplexType">
+		<xs:annotation>
+			<xs:documentation>
+				<cat:InfEvento>
+					<cat:Evento>ACTC101ERR - CTC informa erro no arquivo de solicitação de portabilidade.</cat:Evento>
+					<cat:Descricao>Destinado ao CTC informar erro no arquivo de inclusão de portabilidade.</cat:Descricao>
+					<cat:Servico>Erro no arquivo de inclusão de Portabilidade.</cat:Servico>
+					<cat:TipoFluxo>
+					</cat:TipoFluxo>
+				</cat:InfEvento>
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+</xs:schema>
