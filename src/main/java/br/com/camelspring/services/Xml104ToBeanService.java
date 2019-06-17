@@ -16,15 +16,21 @@ public class Xml104ToBeanService extends RouteBuilder {
         JaxbDataFormat jaxbDataFormat = new JaxbDataFormat(true);
         jaxbDataFormat.setContextPath("br.com.camelspring.bean.actc104FromXsd");
 
-        onException(Exception.class).
+/*        onException(Exception.class).
                 handled(true).
                 log("${body}").
                 log("${exception}").
                 log("${exception.message}").
                 log("${exception.cause}").
-                to("mock:error");
+                to("mock:error");*/
 
-        from("file:arq104?delay=5&noop=true").
+        from("file:arq104?" +
+                "readLock=changed&" +
+                "preMove=processing&" +
+                "maxMessagesPerPoll=1&" +
+                "move=successImport&" +
+                "moveFailed=failImport").
+//                transacted().
                 unmarshal(jaxbDataFormat).
                 bean(Actc104Processor.class, "testeJaxb").
                 log("ACTC104 - ${body}").

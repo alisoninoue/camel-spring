@@ -5,13 +5,14 @@ import br.com.camelspring.processor.GravaTabelaProcessor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.splunk.event.SplunkEvent;
 import org.apache.camel.dataformat.bindy.fixed.BindyFixedLengthDataFormat;
+import org.apache.camel.spring.SpringRouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 
 @Service
-public class ProdutoFromQueueService extends RouteBuilder {
+public class ProdutoFromQueueService extends SpringRouteBuilder {
 
     @Autowired
     private GravaTabelaProcessor gravaTabelaProcessor;
@@ -22,12 +23,14 @@ public class ProdutoFromQueueService extends RouteBuilder {
         BindyFixedLengthDataFormat bindy = new BindyFixedLengthDataFormat(Player.class);
         bindy.setLocale((Locale.getDefault().getISO3Country()));
 
-        onException(Exception.class).
+/*        onException(Exception.class).
                 handled(true).
                 log("${exception.message}").
-                to("mock:error");
+                to("mock:error");*/
 
-        from("{{activemq.from}}").
+        from("{{activemq.from.fake}}").
+//        from("activemq:queue:pedidos").
+                transacted().
                 log("${body}").
                 unmarshal(bindy).
                 multicast().

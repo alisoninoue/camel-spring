@@ -1,33 +1,50 @@
 package br.com.camelspring;
 
-import org.apache.activemq.camel.component.ActiveMQComponent;
-import org.apache.camel.CamelContext;
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.RouteBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.camel.component.sjms2.springboot.Sjms2ComponentAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.Environment;
+import org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration;
+import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration;
 
 import javax.annotation.PostConstruct;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {JmsAutoConfiguration.class, ActiveMQAutoConfiguration.class, Sjms2ComponentAutoConfiguration.class})
 public class Boot {
-	@Autowired
+/*	@Autowired
 	private CamelContext context;
 
-	@Autowired
-	private Environment env;
+	@Value("${activemq.host}")
+	String brokerURL;*/
 
-	public static String ACTIVE_MQ = "activemq";
+    public static String ACTIVE_MQ = "activemq";
 
-	@PostConstruct
-	public void init() throws Exception {
-		context.addComponent(ACTIVE_MQ, ActiveMQComponent.activeMQComponent(env.getProperty("activemq.host")));
-	}
+    @PostConstruct
+    public void init() throws Exception {
+		/*SimpleRegistry registry = new SimpleRegistry();
+		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(brokerURL);
 
-	public static void main(String[] args) {
-		SpringApplication.run(Boot.class, args);
-	}
+		SjmsBatchComponent sjmsBatchComponent = new SjmsBatchComponent();
+		sjmsBatchComponent.setConnectionFactory(connectionFactory);
+
+		ActiveMQComponent activeMQComponent = ActiveMQComponent.activeMQComponent(brokerURL);
+		activeMQComponent.setTransactionManager(configJmsTransaction());
+		activeMQComponent.setTransacted(true);
+		activeMQComponent.setCacheLevelName(String.valueOf(CACHE_CONNECTION));
+
+		context.addComponent(ACTIVE_MQ, activeMQComponent);
+		context.addComponent("sjms-batch", sjmsBatchComponent);*/
+    }
+
+/*	@Bean
+	public JmsTransactionManager configJmsTransaction(){
+		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(brokerURL);
+
+		JmsTransactionManager jmsTransactionManager = new JmsTransactionManager();
+		jmsTransactionManager.setConnectionFactory(connectionFactory);
+		return jmsTransactionManager;
+	}*/
+
+    public static void main(String[] args) {
+        SpringApplication.run(Boot.class, args);
+    }
 }

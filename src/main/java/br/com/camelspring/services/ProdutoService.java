@@ -13,10 +13,10 @@ public class ProdutoService extends RouteBuilder {
                 log("${exception.message}").
                 to("mock:error");
 
-        from("direct:pedidosFile").
+        from("{{file.from.pedidos}}").
                 log("${body}").
-                multicast().
-                to("{{activemq.to}}").
+//                multicast().
+//                to("{{activemq.to}}").
                 to("direct:saida");
 
         from("direct:saida").
@@ -24,6 +24,6 @@ public class ProdutoService extends RouteBuilder {
                 transform(simple("<xpto>${body}</xpto>")).
                 log("${body}").
                 setHeader("CamelFileName", simple("${file:name.noext}_novaTag.xml")).
-        to("file:saida");
+        to("{{file.to.saida}}");
     }
 }
