@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ACTCDOC xmlns="http://www.cip-bancos.org.br/ARQ/ACTC101.xsd">
+  <BCARQ>
+    <NomArq>123213</NomArq>
+    <NumCtrlEmis>22</NumCtrlEmis>
+    <ISPBEmissor>12345678</ISPBEmissor>
+    <ISPBDestinatario>12345678</ISPBDestinatario>
+    <DtHrArq>2019-06-07T10:15:04</DtHrArq>
+    <DtRef>2019-06-07</DtRef>
+  </BCARQ>
+  <SISARQ>
+    <ACTC101RET>
+      <Grupo_ACTC101RET_PortlddActo>
+        <IdentdPartAdmdo>32343334</IdentdPartAdmdo>
+        <NUPortlddCTC>000000123458759658452</NUPortlddCTC>
+        <NumCtrlIF>1323</NumCtrlIF>
+      </Grupo_ACTC101RET_PortlddActo>
+      <Grupo_ACTC101RET_PortlddActo>
+        <IdentdPartAdmdo>22323213</IdentdPartAdmdo>
+        <NUPortlddCTC>222222222222222222222</NUPortlddCTC>
+        <NumCtrlIF>1323</NumCtrlIF>
+      </Grupo_ACTC101RET_PortlddActo>
+
+      <Grupo_ACTC101RET_PortlddRecsd>
+        <IdentdPartAdmdo>12345678</IdentdPartAdmdo>
+        <NumCtrlIF>123213</NumCtrlIF>
+        <Grupo_ACTC101RET_IdentdContrto>
+          <CodContrtoOr CodErro="EGEN0030">0000000000000000000001234567852145211455</CodContrtoOr>
+          <CNPJBase_IFOrContrto>12345678</CNPJBase_IFOrContrto>
+          <TpContrto>0202</TpContrto>
+          <TpEnteCons>1</TpEnteCons>
+          <CNPJCorrespBanc>12345678910001</CNPJCorrespBanc>
+        </Grupo_ACTC101RET_IdentdContrto>
+        <Grupo_ACTC101RET_Cli>
+          <TpCli CodErro="EGEN0028">F</TpCli>
+          <CNPJ_CPFCli>37262889885</CNPJ_CPFCli>
+          <NomCli>Teste</NomCli>
+          <TelCli></TelCli>
+        </Grupo_ACTC101RET_Cli>
+        <Grupo_ACTC101RET_PropPortldd>
+          <DtRefSaldDevdrContb>2019-06-07</DtRefSaldDevdrContb>
+          <VlrSaldDevdrContb>123.34</VlrSaldDevdrContb>
+          <TxJurosNoml>1.2</TxJurosNoml>
+          <TxJurosEft>5</TxJurosEft>
+          <TxCET>1.6</TxCET>
+          <CodMoeda>1</CodMoeda>
+          <RegmAmtzc>1</RegmAmtzc>
+          <DtContrOp>2019-06-07</DtContrOp>
+          <QtdTotParclContrto>23</QtdTotParclContrto>
+          <VlrFaceParclContrto>12312.69</VlrFaceParclContrto>
+          <DtVencPrimParclContrto>2019-06-07</DtVencPrimParclContrto>
+          <DtVencUltParclContrto>2022-06-07</DtVencUltParclContrto>
+        </Grupo_ACTC101RET_PropPortldd>
+        <Grupo_ACTC101RET_EndCartaPortldd>
+          <LogradEndCartaPortldd>Rua Domelia</LogradEndCartaPortldd>
+          <NumEndCartaPortldd>15</NumEndCartaPortldd>
+          <CidEndCartaPortldd>São Paulo</CidEndCartaPortldd>
+          <UFEndCartaPortldd>SP</UFEndCartaPortldd>
+          <CEPEndCartaPortldd>02302100</CEPEndCartaPortldd>
+        </Grupo_ACTC101RET_EndCartaPortldd>
+      </Grupo_ACTC101RET_PortlddRecsd>
+
+      <Grupo_ACTC101RET_PortlddRecsd>
+        <IdentdPartAdmdo>12345678</IdentdPartAdmdo>
+        <NumCtrlIF>123213</NumCtrlIF>
+        <Grupo_ACTC101RET_IdentdContrto>
+          <CodContrtoOr CodErro="EGEN0033">0000000000000000000001234567852145211455</CodContrtoOr>
+          <CNPJBase_IFOrContrto>12345678</CNPJBase_IFOrContrto>
+          <TpContrto>0202</TpContrto>
+          <TpEnteCons>1</TpEnteCons>
+          <CNPJCorrespBanc>12345678910001</CNPJCorrespBanc>
+        </Grupo_ACTC101RET_IdentdContrto>
+        <Grupo_ACTC101RET_Cli>
+          <TpCli>F</TpCli>
+          <CNPJ_CPFCli>37262889885</CNPJ_CPFCli>
+          <NomCli>Teste</NomCli>
+          <TelCli></TelCli>
+        </Grupo_ACTC101RET_Cli>
+        <Grupo_ACTC101RET_PropPortldd>
+          <DtRefSaldDevdrContb>2019-06-07</DtRefSaldDevdrContb>
+          <VlrSaldDevdrContb>123.34</VlrSaldDevdrContb>
+          <TxJurosNoml>1.2</TxJurosNoml>
+          <TxJurosEft>5</TxJurosEft>
+          <TxCET>1.6</TxCET>
+          <CodMoeda>1</CodMoeda>
+          <RegmAmtzc>1</RegmAmtzc>
+          <DtContrOp>2019-06-07</DtContrOp>
+          <QtdTotParclContrto>23</QtdTotParclContrto>
+          <VlrFaceParclContrto>12312.69</VlrFaceParclContrto>
+          <DtVencPrimParclContrto>2019-06-07</DtVencPrimParclContrto>
+          <DtVencUltParclContrto>2022-06-07</DtVencUltParclContrto>
+        </Grupo_ACTC101RET_PropPortldd>
+        <Grupo_ACTC101RET_EndCartaPortldd>
+          <LogradEndCartaPortldd>Rua Domelia</LogradEndCartaPortldd>
+          <NumEndCartaPortldd>15</NumEndCartaPortldd>
+          <CidEndCartaPortldd>São Paulo</CidEndCartaPortldd>
+          <UFEndCartaPortldd>SP</UFEndCartaPortldd>
+          <CEPEndCartaPortldd>02302100</CEPEndCartaPortldd>
+        </Grupo_ACTC101RET_EndCartaPortldd>
+      </Grupo_ACTC101RET_PortlddRecsd>
+
+    </ACTC101RET>
+
+  </SISARQ>
+  <ESTARQ>
+  </ESTARQ>
+ </ACTCDOC>

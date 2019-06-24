@@ -19,7 +19,7 @@ public abstract class BaseRouteBuilder extends SpringRouteBuilder {
                 .logExhaustedMessageBody(true)
                 .logExhaustedMessageHistory(true)
                 .useOriginalMessage()
-                .log("Error SJMS")
+                .log("Erro!")
                 .onPrepareFailure(exchange -> {
                     Exception cause = exchange.getProperty(Exchange.EXCEPTION_CAUGHT, Exception.class);
                     System.out.println(cause);

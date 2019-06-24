@@ -23,6 +23,11 @@ public class Actc101Processor {
 
     }
 
+    public void processa(@Body List<Player> players ){
+        System.out.println("bean method teste called!");
+
+    }
+
     public void testeJaxb(@Body ACTCDOCComplexType actcdocComplexType){
         System.out.println(actcdocComplexType);
     }

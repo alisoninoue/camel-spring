@@ -1,6 +1,6 @@
 package br.com.camelspring.services;
 
-import br.com.camelspring.Config;
+import br.com.camelspring.CamelConfig;
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
@@ -23,8 +23,8 @@ import static org.junit.Assert.assertEquals;
 @ActiveProfiles(value = "test")
 @RunWith(CamelSpringBootRunner.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@DisableJmx(true)
-@SpringBootTest(classes = {Config.class},
+@DisableJmx()
+@SpringBootTest(classes = {CamelConfig.class},
         properties = {"camel.springboot.java-routes-include-pattern=**/ProdutoService*"})
 public class ProdutoServiceTest {
 
@@ -40,7 +40,7 @@ public class ProdutoServiceTest {
 
         template.sendBodyAndHeader("Hello World", Exchange.FILE_NAME, "hello.txt");
 
-        assertTrue(notify.matchesMockWaitTime());
+        assertTrue(notify.matches());
 
         File target = new File("saida/hello_novaTag.xml");
         assertTrue("File should have been moved", target.exists());

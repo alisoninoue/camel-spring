@@ -1,28 +1,33 @@
 package br.com.camelspring.services;
 
-import br.com.camelspring.bean.TestException;
+import org.apache.camel.routepolicy.quartz2.CronScheduledRoutePolicy;
 import org.springframework.stereotype.Service;
+
+import static org.apache.camel.model.TransactedDefinition.PROPAGATION_REQUIRED;
 
 @Service
 public class MqSjmsBatch extends BaseRouteBuilder {
+
+    public final static String ROUTE_ID_MQSJMS = "queue-processor";
 
     @Override
     public void configure() throws Exception {
 
         super.configure();
-        String routeId = "queue-processor";
 
-/*        onException(Exception.class).
-                handled(true).
-                log("${exception.message}").
-                to("mock:error");*/
+        CronScheduledRoutePolicy cronPolicy = new CronScheduledRoutePolicy();
+        cronPolicy.setRouteStartTime("* 20 12 * * ?");
+        cronPolicy.setRouteStopTime("*  12 * * ?");
 
-        from("sjms-batch:pedidos?aggregationStrategy=#joinBodyAggregatorStrategy&completionSize=3&completionTimeout=1000")
-                .transacted()
-                .routeId(routeId)
+
+        from("{{mqsjms.from}}")
+                .routeId(ROUTE_ID_MQSJMS)
+//                .noAutoStartup()
+//                .routePolicy(cronPolicy)
+                .transacted(PROPAGATION_REQUIRED)
                 .log("${body}")
-                .bean(TestException.class, "testException")
-                .to("mock:testequeue")
+                //.bean(TestException.class, "testException")
+                .to("{{mqsjms.split}}")
         ;
     }
 }

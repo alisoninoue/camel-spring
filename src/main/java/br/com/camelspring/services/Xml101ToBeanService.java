@@ -28,8 +28,13 @@ public class Xml101ToBeanService extends RouteBuilder {
                 log("${exception.cause}").
                 to("mock:error");
 
-        from("file:arq101?delay=5&noop=true").
-                log("${id} - ${body}").
+        from("file:arq101?" +
+                "readLock=idempotent" +
+                "&idempotentRepository=#myRepo" +
+                "&readLockLoggingLevel=WARN" +
+                "&shuffle=true").
+                delay(10).
+//                log("${id} - ${body}").
                 choice().
                     when(xpath("//c:ACTC101RET or //c:ACTC101").namespace("c", ACTC_101_XSD)).
                         unmarshal(jaxbDataFormat).

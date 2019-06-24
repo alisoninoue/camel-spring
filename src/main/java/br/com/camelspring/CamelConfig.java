@@ -1,9 +1,13 @@
 package br.com.camelspring;
 
+import com.hazelcast.config.*;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.sjms.batch.SjmsBatchComponent;
+import org.apache.camel.processor.idempotent.hazelcast.HazelcastIdempotentRepository;
 import org.apache.camel.spring.spi.SpringTransactionPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +17,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.connection.JmsTransactionManager;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.jms.ConnectionFactory;
 
@@ -21,7 +24,7 @@ import static org.apache.camel.model.TransactedDefinition.PROPAGATION_REQUIRED;
 
 @Configuration
 @ComponentScan
-public class Config {
+public class CamelConfig {
 
     final CamelContext camelContext;
 
@@ -29,8 +32,29 @@ public class Config {
     String brokerURL;
 
     @Autowired
-    public Config(final CamelContext camelContext) {
+    public CamelConfig(final CamelContext camelContext) {
         this.camelContext = camelContext;
+    }
+
+    @Bean
+    public Config hazelCastConfig(){
+        Config config = new Config();
+        config.setInstanceName("hazelcast-instance")
+                .addMapConfig(
+                        new MapConfig()
+                                .setName("configuration")
+                                .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.FREE_HEAP_SIZE))
+                                .setEvictionPolicy(EvictionPolicy.LRU)
+                                .setTimeToLiveSeconds(-1));
+
+
+        return config;
+    }
+
+    @Bean(name = "myRepo")
+    public HazelcastIdempotentRepository hazelcastIdempotentRepository(Config config){
+        HazelcastInstance hz = Hazelcast.newHazelcastInstance(config);
+        return new HazelcastIdempotentRepository(hz,"camel");
     }
 
     @Bean
@@ -47,11 +71,19 @@ public class Config {
         return transactionManager;
     }
 
-/*    @Bean(name = "PROPAGATION_REQUIRED")
+    @Bean(name = PROPAGATION_REQUIRED)
     public SpringTransactionPolicy springTransactionPolicy (JmsTransactionManager jmsTransactionManager){
         final SpringTransactionPolicy springTransactionPolicy = new SpringTransactionPolicy();
         springTransactionPolicy.setTransactionManager(jmsTransactionManager);
         springTransactionPolicy.setPropagationBehaviorName(PROPAGATION_REQUIRED);
+        return springTransactionPolicy;
+    }
+
+    /*@Bean(name = PROPAGATION_REQUIRED_NEW)
+    public SpringTransactionPolicy springTransactionPolicyNew (JmsTransactionManager jmsTransactionManager){
+        final SpringTransactionPolicy springTransactionPolicy = new SpringTransactionPolicy();
+        springTransactionPolicy.setTransactionManager(jmsTransactionManager);
+        springTransactionPolicy.setPropagationBehaviorName(PROPAGATION_REQUIRED_NEW);
         return springTransactionPolicy;
     }*/
 

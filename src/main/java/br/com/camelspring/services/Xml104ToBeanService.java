@@ -1,10 +1,9 @@
 package br.com.camelspring.services;
 
 import br.com.camelspring.bean.Actc104Processor;
-import br.com.camelspring.processor.GravaTabelaProcessor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JaxbDataFormat;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.camel.routepolicy.quartz2.CronScheduledRoutePolicy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +11,10 @@ public class Xml104ToBeanService extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+
+        CronScheduledRoutePolicy startPolicy = new CronScheduledRoutePolicy();
+        startPolicy.setRouteStartTime("* 13 22 * * ?");
+        startPolicy.setRouteStopTime("* 14 22 * * ?");
 
         JaxbDataFormat jaxbDataFormat = new JaxbDataFormat(true);
         jaxbDataFormat.setContextPath("br.com.camelspring.bean.actc104FromXsd");
@@ -31,7 +34,9 @@ public class Xml104ToBeanService extends RouteBuilder {
                 "move=successImport&" +
                 "moveFailed=failImport").
 //                transacted().
-                unmarshal(jaxbDataFormat).
+        unmarshal(jaxbDataFormat).
+                noAutoStartup().
+                routePolicy(startPolicy).
                 bean(Actc104Processor.class, "testeJaxb").
                 log("ACTC104 - ${body}").
                 to("mock:saida101RET");
