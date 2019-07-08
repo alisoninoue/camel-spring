@@ -35,10 +35,13 @@ public class Xml104ToBeanService extends RouteBuilder {
                 "moveFailed=failImport").
 //                transacted().
         unmarshal(jaxbDataFormat).
-                noAutoStartup().
-                routePolicy(startPolicy).
+//                noAutoStartup().
+//                routePolicy(startPolicy).
                 bean(Actc104Processor.class, "testeJaxb").
+                split().method(Actc104Processor.class, "testeSplit").
+
                 log("ACTC104 - ${body}").
-                to("mock:saida101RET");
+                to("activemq:pedidos");
+//                to("mock:saida101RET");
     }
 }

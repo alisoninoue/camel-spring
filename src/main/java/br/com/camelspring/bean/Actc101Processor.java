@@ -1,7 +1,7 @@
 package br.com.camelspring.bean;
 
 import br.com.camelspring.bean.actc101.Actc101;
-import br.com.camelspring.bean.actc101FromXsd.ACTCDOCComplexType;
+import br.com.camelspring.bean.actc101FromXsd.*;
 import org.apache.camel.Body;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -12,8 +12,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.*;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class Actc101Processor {
@@ -23,8 +26,62 @@ public class Actc101Processor {
 
     }
 
-    public void processa(@Body List<Player> players ){
+    public ACTCDOCComplexType processa(@Body List<Player> players ){
         System.out.println("bean method teste called!");
+
+        ObjectFactory factory = new ObjectFactory();
+
+        CNPJCPFCodErro cnpjcpfCodErro = factory.createCNPJCPFCodErro();
+        cnpjcpfCodErro.setValue("132132131");
+
+        TelefoneCodErro telefoneCodErro = factory.createTelefoneCodErro();
+        telefoneCodErro.setValue("123123213");
+
+        BCARQComplexType bcarqComplexType = factory.createBCARQComplexType();
+        bcarqComplexType.setDtHrArq(LocalDateTime.now());
+
+        GrupoIdentdContrtoComplexType grupoIdentdContrtoComplexType = factory.createGrupoIdentdContrtoComplexType();
+
+        GrupoACTCCliComplexTypeCodErro grupoACTCCliComplexTypeCodErro = factory.createGrupoACTCCliComplexTypeCodErro();
+        grupoACTCCliComplexTypeCodErro.setCNPJCPFCli(cnpjcpfCodErro);
+        grupoACTCCliComplexTypeCodErro.setTelCli(telefoneCodErro);
+
+
+        GrupoACTC10XIdentdContrtoComplexType actc10XIdentdContrtoComplexType = factory.createGrupoACTC10XIdentdContrtoComplexType();
+
+
+        GrupoACTC10XPropPortlddComplexType grupoACTC10XPropPortlddComplexType = factory.createGrupoACTC10XPropPortlddComplexType();
+
+        DataCodErro dtContrOp = factory.createDataCodErro();
+        dtContrOp.setValue(players.get(0).getRetirementDate());
+        grupoACTC10XPropPortlddComplexType.setDtContrOp(dtContrOp);
+
+        DataCodErro dtRefSaldDevdrContb = factory.createDataCodErro();
+        dtRefSaldDevdrContb.setValue(LocalDate.now());
+        grupoACTC10XPropPortlddComplexType.setDtRefSaldDevdrContb(dtRefSaldDevdrContb);
+
+        ValorCodErro valorCodErro = factory.createValorCodErro();
+        valorCodErro.setValue(players.get(0).getStrikeRate());
+        grupoACTC10XPropPortlddComplexType.setVlrFaceParclContrto(valorCodErro);
+
+        GrupoACTC101PortlddComplexType grupoACTC101PortlddCT = factory.createGrupoACTC101PortlddComplexType();
+        grupoACTC101PortlddCT.setIdentdPartAdmdo("teste");
+        grupoACTC101PortlddCT.setNumCtrlIF("1234");
+        grupoACTC101PortlddCT.setGrupoACTC101Cli(grupoACTCCliComplexTypeCodErro);
+        grupoACTC101PortlddCT.setGrupoACTC101PropPortldd(grupoACTC10XPropPortlddComplexType);
+
+        ACTC101ComplexType actc101ComplexType = factory.createACTC101ComplexType();
+        List<GrupoACTC101PortlddComplexType> grupoACTC101Portldd = actc101ComplexType.getGrupoACTC101Portldd();
+        grupoACTC101Portldd.add(grupoACTC101PortlddCT);
+
+        SISARQComplexType sisarqComplexType = factory.createSISARQComplexType();
+        sisarqComplexType.setACTC101(actc101ComplexType);
+
+        ACTCDOCComplexType actcdocComplexType = factory.createACTCDOCComplexType();
+        actcdocComplexType.setSISARQ(sisarqComplexType);
+        actcdocComplexType.setBCARQ(bcarqComplexType);
+
+        return actcdocComplexType;
 
     }
 

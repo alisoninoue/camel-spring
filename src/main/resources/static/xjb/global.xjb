@@ -1,0 +1,15 @@
+<jaxb:bindings xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               jaxb:version="2.0"
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               jaxb:extensionBindingPrefixes="xjc">
+    <jaxb:globalBindings>
+        <jaxb:serializable uid="1"/>
+        <jaxb:javaType name="java.time.LocalDateTime" xmlType="xsd:dateTime"
+                       parseMethod="br.com.camelspring.bean.DataTypeConverter.parseDateTime"
+                       printMethod="br.com.camelspring.bean.DataTypeConverter.printDateTime"/>
+        <jaxb:javaType name="java.time.LocalDate" xmlType="xsd:date"
+                       parseMethod="br.com.camelspring.bean.DataTypeConverter.parseDate"
+                       printMethod="br.com.camelspring.bean.DataTypeConverter.printDate"/>
+    </jaxb:globalBindings>
+</jaxb:bindings>

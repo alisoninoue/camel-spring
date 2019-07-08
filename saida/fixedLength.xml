@@ -6,7 +6,7 @@
       <CodContrtoOr>777</CodContrtoOr>
       <CNPJBase_IFOrContrto>123456</CNPJBase_IFOrContrto>
       <tpContrto>202</tpContrto>
-      <tpEnteCons>1</tpEnteCons>
+      <tpEnteCons>01</tpEnteCons>
       <cnpjCorrespBanc>456678</cnpjCorrespBanc>
     </Grupo_ACTC101_IdentdContrto>
     <Grupo_ACTC101_Cli>
@@ -25,7 +25,7 @@
       <CodContrtoOr>777</CodContrtoOr>
       <CNPJBase_IFOrContrto>123456</CNPJBase_IFOrContrto>
       <tpContrto>202</tpContrto>
-      <tpEnteCons>1</tpEnteCons>
+      <tpEnteCons>01</tpEnteCons>
       <cnpjCorrespBanc>456678</cnpjCorrespBanc>
     </Grupo_ACTC101_IdentdContrto>
     <Grupo_ACTC101_Cli>

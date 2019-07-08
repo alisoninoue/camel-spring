@@ -7,7 +7,7 @@ import org.apache.camel.dataformat.bindy.annotation.Link;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Here we are processing a fixed length record in below format
@@ -32,7 +32,7 @@ public class Player implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DataField(pos = 2, length = 10, pattern = "yyyy-MM-dd")
-    private Date debutDate;
+    private LocalDate debutDate;
 
     @DataField(pos = 3, length = 12, trim = true, align = "L")
     private String country;
@@ -54,7 +54,7 @@ public class Player implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DataField(pos = 9, length = 10, pattern = "yyyy-MM-dd", defaultValue = "2021-12-31")
-    private Date retirementDate;
+    private LocalDate retirementDate;
 
     @Link
     private Address address;
@@ -67,11 +67,11 @@ public class Player implements Serializable {
         this.name = name;
     }
 
-    public Date getDebutDate() {
+    public LocalDate getDebutDate() {
         return debutDate;
     }
 
-    public void setDebutDate(Date debutDate) {
+    public void setDebutDate(LocalDate debutDate) {
         this.debutDate = debutDate;
     }
 
@@ -123,11 +123,11 @@ public class Player implements Serializable {
         this.batingPosition = batingPosition;
     }
 
-    public Date getRetirementDate() {
+    public LocalDate getRetirementDate() {
         return retirementDate;
     }
 
-    public void setRetirementDate(Date retirementDate) {
+    public void setRetirementDate(LocalDate retirementDate) {
         this.retirementDate = retirementDate;
     }
 

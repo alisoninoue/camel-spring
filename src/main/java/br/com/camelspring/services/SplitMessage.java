@@ -3,6 +3,7 @@ package br.com.camelspring.services;
 import br.com.camelspring.bean.Actc101Processor;
 import br.com.camelspring.bean.Player;
 import org.apache.camel.dataformat.bindy.fixed.BindyFixedLengthDataFormat;
+import org.apache.camel.model.dataformat.JaxbDataFormat;
 import org.apache.camel.spring.SpringRouteBuilder;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,11 @@ public class SplitMessage extends BaseRouteBuilder {
         BindyFixedLengthDataFormat bindy = new BindyFixedLengthDataFormat(Player.class);
         bindy.setLocale("default");
 
+
+        JaxbDataFormat jaxbDataFormat = new JaxbDataFormat(true);
+        jaxbDataFormat.setContextPath("br.com.camelspring.bean.actc101FromXsd");
+
+
         from("{{mqsjms.split}}")
                 .routeId(ROUTE_ID_SPLIT)
                 .split(body().tokenize("\n"), new JoinBindyAggregationStrategy())
@@ -36,6 +42,9 @@ public class SplitMessage extends BaseRouteBuilder {
                 .end()
                 .log("after split: ${body}")
                 .bean(Actc101Processor.class, "processa")
-                .to("mock:saidaSplit");
+                .marshal(jaxbDataFormat)
+                .log("${body}")
+                .setHeader("CamelFileName", simple("MP3_{{cnpj.xpto}}_${date:now:yyyyMMdd}_${file:name.noext}_teste.xml"))
+                .to("file:saida");
     }
 }

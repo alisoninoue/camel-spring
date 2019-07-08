@@ -36,7 +36,7 @@ public class CamelConfig {
         this.camelContext = camelContext;
     }
 
-    @Bean
+    /*@Bean
     public Config hazelCastConfig(){
         Config config = new Config();
         config.setInstanceName("hazelcast-instance")
@@ -55,7 +55,7 @@ public class CamelConfig {
     public HazelcastIdempotentRepository hazelcastIdempotentRepository(Config config){
         HazelcastInstance hz = Hazelcast.newHazelcastInstance(config);
         return new HazelcastIdempotentRepository(hz,"camel");
-    }
+    }*/
 
     @Bean
     public ActiveMQConnectionFactory connectionFactory() {

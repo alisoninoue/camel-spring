@@ -7,7 +7,7 @@ import org.apache.camel.model.dataformat.JaxbDataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class Xml101ToBeanService extends RouteBuilder {
 
     public static final String ACTC_101_XSD = "http://www.cip-bancos.org.br/ARQ/ACTC101.xsd";
