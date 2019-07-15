@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<properties>
-		<camel-version>2.24.0</camel-version>
+		<camel-version>2.24.1</camel-version>
 	</properties>
 
 	<parent>
@@ -64,6 +64,11 @@
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-spring-boot-starter</artifactId>
+			<version>${camel-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jpa-starter</artifactId>
 			<version>${camel-version}</version>
 		</dependency>
 		<dependency>

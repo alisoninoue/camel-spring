@@ -4,15 +4,19 @@ import br.com.camelspring.bean.Actc101Processor;
 import br.com.camelspring.processor.GravaTabelaProcessor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JaxbDataFormat;
+import org.apache.camel.processor.idempotent.jpa.JpaMessageIdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class Xml101ToBeanService extends RouteBuilder {
 
     public static final String ACTC_101_XSD = "http://www.cip-bancos.org.br/ARQ/ACTC101.xsd";
     @Autowired
     private GravaTabelaProcessor gravaTabelaProcessor;
+
+    @Autowired
+    private JpaMessageIdRepository jpaMessageIdRepository;
 
     @Override
     public void configure() throws Exception {
@@ -30,10 +34,12 @@ public class Xml101ToBeanService extends RouteBuilder {
 
         from("file:arq101?" +
                 "readLock=idempotent" +
-                "&idempotentRepository=#myRepo" +
+                "&idempotentRepository=#testeIdempotent" +
                 "&readLockLoggingLevel=WARN" +
+                "&readLockRemoveOnCommit=true" +
                 "&shuffle=true").
                 delay(10).
+                idempotentConsumer(header("CamelFileName"), jpaMessageIdRepository).
 //                log("${id} - ${body}").
                 choice().
                     when(xpath("//c:ACTC101RET or //c:ACTC101").namespace("c", ACTC_101_XSD)).
