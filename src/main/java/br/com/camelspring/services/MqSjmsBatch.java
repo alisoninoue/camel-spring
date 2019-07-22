@@ -24,7 +24,7 @@ public class MqSjmsBatch extends BaseRouteBuilder {
                 .routeId(ROUTE_ID_MQSJMS)
 //                .noAutoStartup()
 //                .routePolicy(cronPolicy)
-                .transacted(PROPAGATION_REQUIRED)
+                .transacted()
                 .log("${body}")
                 //.bean(TestException.class, "testException")
                 .to("{{mqsjms.split}}")

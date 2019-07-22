@@ -5,6 +5,7 @@ import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.sjms.batch.SjmsBatchComponent;
 import org.apache.camel.processor.idempotent.jpa.JpaMessageIdRepository;
+import org.apache.camel.processor.interceptor.BacklogTracer;
 import org.apache.camel.spring.spi.SpringTransactionPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +24,7 @@ import static org.apache.camel.model.TransactedDefinition.PROPAGATION_REQUIRED;
 
 @Configuration
 @ComponentScan
-@EntityScan({"org.apache.camel.processor.idempotent.jpa", "br.com.camelspring.entity"})
+@EntityScan({"org.apache.camel.processor.idempotent.jpa", "org.apache.camel.processor.interceptor.jpa", "br.com.camelspring.entity"})
 public class CamelConfig {
 
     final CamelContext camelContext;
@@ -34,6 +35,9 @@ public class CamelConfig {
     @Autowired
     public CamelConfig(final CamelContext camelContext) {
         this.camelContext = camelContext;
+        this.camelContext.setTracing(true);
+        this.camelContext.setUseMDCLogging(true);
+
     }
 
     /*@Bean
@@ -64,7 +68,7 @@ public class CamelConfig {
         return activeMQConnectionFactory;
     }
 
-    @Bean
+/*    @Bean
     public JmsTransactionManager transactionManager(ConnectionFactory connectionFactory) {
         final JmsTransactionManager transactionManager = new JmsTransactionManager();
         transactionManager.setConnectionFactory(connectionFactory);
@@ -77,7 +81,7 @@ public class CamelConfig {
         springTransactionPolicy.setTransactionManager(jmsTransactionManager);
         springTransactionPolicy.setPropagationBehaviorName(PROPAGATION_REQUIRED);
         return springTransactionPolicy;
-    }
+    }*/
 
     /*@Bean(name = PROPAGATION_REQUIRED_NEW)
     public SpringTransactionPolicy springTransactionPolicyNew (JmsTransactionManager jmsTransactionManager){
@@ -102,13 +106,15 @@ public class CamelConfig {
         return jpaMessageIdRepository;
     }
 
+
     @Bean(name = "activemq")
     @ConditionalOnClass(ActiveMQComponent.class)
-    public ActiveMQComponent activeMQComponent(ConnectionFactory connectionFactory, JmsTransactionManager jmsTransactionManager) {
+    public ActiveMQComponent activeMQComponent(ConnectionFactory connectionFactory) {
+//            , JmsTransactionManager jmsTransactionManager) {
         ActiveMQComponent activeMQComponent = new ActiveMQComponent();
         activeMQComponent.setConnectionFactory(connectionFactory);
 //        activeMQComponent.setTransacted(true);
-        activeMQComponent.setTransactionManager(jmsTransactionManager);
+//        activeMQComponent.setTransactionManager(jmsTransactionManager);
         activeMQComponent.setCacheLevel(DefaultMessageListenerContainer.CACHE_CONSUMER);
         activeMQComponent.setLazyCreateTransactionManager(false);
         return activeMQComponent;

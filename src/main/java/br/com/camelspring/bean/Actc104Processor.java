@@ -3,12 +3,16 @@ package br.com.camelspring.bean;
 import br.com.camelspring.bean.actc104FromXsd.ACTCDOCComplexType;
 import br.com.camelspring.bean.actc104FromXsd.GrupoACTC104PortlddComplexType;
 import org.apache.camel.Body;
+import org.apache.camel.Exchange;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 public class Actc104Processor {
+    public void auditLog(Exchange exchange){
+        System.out.println("exchange = [" + exchange + "]");
+    }
 
     public void testeJaxb(@Body ACTCDOCComplexType actcdocComplexType) {
         System.out.println(actcdocComplexType);
