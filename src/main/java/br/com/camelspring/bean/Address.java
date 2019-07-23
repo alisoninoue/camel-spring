@@ -10,10 +10,10 @@ public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @DataField(pos = 10, length = 15, trim = true, align = "L")
+    @DataField(pos = 11, length = 15, trim = true, align = "L")
     private String name;
 
-    @DataField(pos = 11, length = 8, trim = true, align = "L")
+    @DataField(pos = 12, length = 8, trim = true, align = "L")
     private String cep;
 
     public String getName() {

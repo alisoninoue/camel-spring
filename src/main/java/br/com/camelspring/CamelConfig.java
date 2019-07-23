@@ -4,6 +4,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.sjms.batch.SjmsBatchComponent;
+import org.apache.camel.component.sjms2.Sjms2Component;
 import org.apache.camel.processor.idempotent.jpa.JpaMessageIdRepository;
 import org.apache.camel.processor.interceptor.BacklogTracer;
 import org.apache.camel.spring.spi.SpringTransactionPolicy;
@@ -126,5 +127,13 @@ public class CamelConfig {
         SjmsBatchComponent sjmsBatchComponent = new SjmsBatchComponent();
         sjmsBatchComponent.setConnectionFactory(connectionFactory);
         return sjmsBatchComponent;
+    }
+
+    @Bean(name = "sjms2")
+    @ConditionalOnClass(Sjms2Component.class)
+    public Sjms2Component sjms2Component(ConnectionFactory connectionFactory) {
+        Sjms2Component sjms2Component = new Sjms2Component();
+        sjms2Component.setConnectionFactory(connectionFactory);
+        return sjms2Component;
     }
 }
