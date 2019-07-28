@@ -9,6 +9,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.test.spring.CamelSpringBootRunner;
+import org.apache.camel.test.spring.DisableJmx;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.concurrent.TimeUnit;
 
 import static br.com.camelspring.services.MqSjmsBatch.ROUTE_ID_MQSJMS;
-import static org.junit.Assert.assertTrue;
 
 @ActiveProfiles(value = "test")
+@DisableJmx
 @RunWith(CamelSpringBootRunner.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @SpringBootTest(classes = {CamelConfig.class},

@@ -8,9 +8,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.Body;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -18,14 +17,18 @@ import java.time.LocalDateTime;
 @Component
 public class LogBean {
 
-    @Autowired
-    public LogRepository repository;
+    private LogRepository repository;
 
-    Logger logger = LoggerFactory.getLogger(LogBean.class);
+    private static final Logger logger = LogManager.getLogger(LogBean.class);
+
+    public LogBean(LogRepository repository) {
+        this.repository = repository;
+    }
 
     public void gravaLog(Exchange exchange, @Body String bodyMessage) {
         Message message = exchange.getIn();
-        String exchangeCorrelationId = message.getHeader("exchangeCorrelationId", String.class);
+        String exchangeId = exchange.getExchangeId();
+        String breadcrumbId = message.getHeader("breadcrumbId", String.class);
         String action = message.getHeader("action", String.class);
         String contrato = null;
 
@@ -37,7 +40,7 @@ public class LogBean {
         String fromRouteId1 = exchange.getUnitOfWork().getRouteContext().getRoute().getId();
         String fileName = message.getHeader(Exchange.FILE_NAME, String.class);
 
-        Log log = new Log(1, fromRouteId1, exchangeCorrelationId, contrato, bodyMessage, LocalDateTime.now(), contrato, fileName);
+        Log log = new Log(1, fromRouteId1, breadcrumbId, contrato, bodyMessage, LocalDateTime.now(), contrato, fileName);
 
         ObjectMapper mapper = new ObjectMapper();
         try {

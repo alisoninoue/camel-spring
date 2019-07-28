@@ -8,7 +8,7 @@ import static org.apache.camel.model.TransactedDefinition.PROPAGATION_REQUIRED;
 @Service
 public class MqSjmsBatch extends BaseRouteBuilder {
 
-    public final static String ROUTE_ID_MQSJMS = "queue-processor";
+    public static final String ROUTE_ID_MQSJMS = "queue-processor";
 
     @Override
     public void configure() throws Exception {
@@ -25,6 +25,7 @@ public class MqSjmsBatch extends BaseRouteBuilder {
 //                .noAutoStartup()
 //                .routePolicy(cronPolicy)
                 .transacted()
+                .wireTap("bean:logBean")
                 .log("${body}")
                 //.bean(TestException.class, "testException")
                 .to("{{mqsjms.split}}")

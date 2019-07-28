@@ -5,7 +5,7 @@ Configuration:
     Console:
       name: LogToConsole
       PatternLayout:
-        Pattern: "%d [%-15.15t] %-5p %-30.30c{1} - %-10.10X{camel.exchangeId} - %-10.10X{camel.correlationId} - %-10.10X{camel.transactionKey} - %-10.10X{camel.routeId} - %m%n"
+        Pattern: "%d [%-15.15t] %-5p %-30.30c{1} - %-10.10X{camel.breadcrumbId} - %-10.10X{camel.exchangeId} - %-10.10X{camel.correlationId} - %-10.10X{camel.transactionKey} - %-10.10X{camel.routeId} - %m%n"
 
     RollingFile:
       - name: LogToRollingFile

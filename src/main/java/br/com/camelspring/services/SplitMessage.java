@@ -37,14 +37,18 @@ public class SplitMessage extends BaseRouteBuilder {
         from("{{mqsjms.split}}")
                 .routeId(ROUTE_ID_SPLIT)
                 .split(body().tokenize("\n"), new JoinBindyAggregationStrategy())
+                        .wireTap("bean:logBean")
                         .unmarshal(bindy)
-                    .log("${body}")
+                        .log("${body}")
+                    .end()
                 .end()
+                .wireTap("bean:logBean")
                 .log("after split: ${body}")
                 .bean(Actc101Processor.class, "processa")
                 .marshal(jaxbDataFormat)
                 .log("${body}")
-                .setHeader("CamelFileName", simple("MP3_{{cnpj.xpto}}_${file:name.noext}_teste.xml"))
+                .setHeader("CamelFileName", simple("MP3_{{cnpj.xpto}}_${header.exchangeCorrelationId.replaceAll(\"[^a-zA-Z0-9_-]\", \"\")}_${file:name.noext}teste.xml"))
+                .wireTap("bean:logBean")
                 .to("file:saida");
     }
 }

@@ -44,7 +44,7 @@ public class Xml104ToBeanService extends RouteBuilder {
                 "moveFailed=failImport").
 //                transacted().
                 routeId("104xml").
-                setHeader("exchangeCorrelationId", simple("${id}")).
+//                setHeader("exchangeCorrelationId", simple("${id}")).
                 wireTap("bean:logBean").newExchangeHeader("action",constant("ACTC104 - Inicio")).
                 unmarshal(jaxbDataFormat).
                 wireTap("bean:logBean").

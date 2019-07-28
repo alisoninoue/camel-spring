@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Here we are processing a fixed length record in below format
@@ -177,43 +178,27 @@ public class Player implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((country == null) ? 0 : country.hashCode());
-        result = prime * result
-                + ((debutDate == null) ? 0 : debutDate.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return getMatchesPlayed() == player.getMatchesPlayed() &&
+                Float.compare(player.getAverageRunRate(), getAverageRunRate()) == 0 &&
+                getBatingPosition() == player.getBatingPosition() &&
+                Objects.equals(getName(), player.getName()) &&
+                Objects.equals(getDebutDate(), player.getDebutDate()) &&
+                Objects.equals(getCountry(), player.getCountry()) &&
+                Objects.equals(getRunsScored(), player.getRunsScored()) &&
+                Objects.equals(getStrikeRate(), player.getStrikeRate()) &&
+                Objects.equals(getRetirementDate(), player.getRetirementDate()) &&
+                Objects.equals(getValueTest(), player.getValueTest()) &&
+                Objects.equals(getAddress(), player.getAddress());
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Player other = (Player) obj;
-        if (country == null) {
-            if (other.country != null)
-                return false;
-        } else if (!country.equals(other.country))
-            return false;
-        if (debutDate == null) {
-            if (other.debutDate != null)
-                return false;
-        } else if (!debutDate.equals(other.debutDate))
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(getName(), getDebutDate(), getCountry(), getMatchesPlayed(), getRunsScored(), getAverageRunRate(), getStrikeRate(), getBatingPosition(), getRetirementDate(), getValueTest(), getAddress());
     }
-
 
     public static class CustomConverter implements Format<Object> {
         @Override
