@@ -36,7 +36,7 @@ public class CamelConfig {
     @Autowired
     public CamelConfig(final CamelContext camelContext) {
         this.camelContext = camelContext;
-        this.camelContext.setTracing(true);
+        this.camelContext.setTracing(false);
         this.camelContext.setUseMDCLogging(true);
 
     }

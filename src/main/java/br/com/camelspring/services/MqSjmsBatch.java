@@ -1,9 +1,6 @@
 package br.com.camelspring.services;
 
-import org.apache.camel.routepolicy.quartz2.CronScheduledRoutePolicy;
 import org.springframework.stereotype.Service;
-
-import static org.apache.camel.model.TransactedDefinition.PROPAGATION_REQUIRED;
 
 @Service
 public class MqSjmsBatch extends BaseRouteBuilder {
@@ -15,20 +12,20 @@ public class MqSjmsBatch extends BaseRouteBuilder {
 
         super.configure();
 
-        CronScheduledRoutePolicy cronPolicy = new CronScheduledRoutePolicy();
-        cronPolicy.setRouteStartTime("* 20 12 * * ?");
-        cronPolicy.setRouteStopTime("*  12 * * ?");
+        CustomCronScheduleRoutePolicy cronPolicy = new CustomCronScheduleRoutePolicy(getContext());
+        cronPolicy.setRouteStartTime("* 59 10 * * ?");
+        cronPolicy.setRouteStopTime("* 59 23 * * ?");
+        cronPolicy.setTimeZone("America/Sao_Paulo");
 
 
         from("{{mqsjms.from}}")
                 .routeId(ROUTE_ID_MQSJMS)
-//                .noAutoStartup()
-//                .routePolicy(cronPolicy)
+                .noAutoStartup()
+                .routePolicy(cronPolicy)
                 .transacted()
                 .wireTap("bean:logBean")
                 .log("${body}")
                 //.bean(TestException.class, "testException")
-                .to("{{mqsjms.split}}")
-        ;
+                .to("{{mqsjms.split}}");
     }
 }
