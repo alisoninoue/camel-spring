@@ -47,7 +47,7 @@ public class SplitMessage extends BaseRouteBuilder {
                 .bean(Actc101Processor.class, "processa")
                 .marshal(jaxbDataFormat)
                 .log("${body}")
-                .setHeader("CamelFileName", simple("MP3_{{cnpj.xpto}}_${header.exchangeCorrelationId.replaceAll(\"[^a-zA-Z0-9_-]\", \"\")}_${file:name.noext}teste.xml"))
+                .setHeader("CamelFileName", simple("MP3_${bean:fileIdBean?method=generateId}_{{cnpj.xpto}}_${header.breadcrumbid.replaceAll(\"[^a-zA-Z0-9_-]\", \"\")}_${id}.xml"))
                 .wireTap("bean:logBean")
                 .to("file:saida");
     }
