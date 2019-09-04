@@ -3,19 +3,37 @@ Configuration:
 
   appenders:
     Console:
-      name: LogToConsole
-      PatternLayout:
-        Pattern: "%d [%-15.15t] %-5p %-30.30c{1} - %-10.10X{camel.breadcrumbId} - %-10.10X{camel.exchangeId} - %-10.10X{camel.correlationId} - %-10.10X{camel.transactionKey} - %-10.10X{camel.routeId} - %m%n"
+      - name: Console
+        PatternLayout:
+          Pattern: "%d [%-15.15t] %-5p %-30.30c{1} - %-10.10X{camel.breadcrumbId} - %-10.10X{camel.exchangeId} - %-10.10X{camel.correlationId} - %-10.10X{camel.transactionKey} - %-10.10X{camel.routeId} - %m%n"
 
     RollingFile:
-      - name: LogToRollingFile
+      - name: File
         fileName: logs/app.log
-        filePattern: "logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz"
+        filePattern: "logs/$${date:yyyy-MM}/app-%d{yyyy-MM-dd}-%i.log"
+        JSONLayout:
+          complete: false
+          compact: true
+          eventEol: true
+          objectMessageAsJsonObject: true
+          properties: true
         PatternLayout:
-          pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+          pattern: "{\"logLevel\": \"%level\",
+                     \"dateTime\": \"%d{yyyy-MM-dd HH:mm:ss.SSS}\",
+                     \"breadcrumbId\": \"%X{camel.breadcrumbId}\",
+                     \"exchangeId\": \"%X{camel.exchangeId}\",
+                     \"correlationId\": \"%X{camel.correlationId}\",
+                     \"transactionKey\": \"%X{camel.transactionKey}\",
+                     \"routeId\": \"%X{camel.routeId}\",
+                     \"thread\":\"%t\",
+                     \"class\": \"%c{1}\",
+                     \"message\": \"%m\"}
+                     %n"
         Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
           SizeBasedTriggeringPolicy:
-            size: 10MB
+            size: 1MB
         DefaultRollOverStrategy:
           max: 10
 
@@ -23,5 +41,5 @@ Configuration:
     Root:
       level: info
       AppenderRef:
-        - ref: LogToConsole
-        - ref: LogToRollingFile
+        - ref: Console
+        - ref: File

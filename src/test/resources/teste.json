@@ -1,0 +1,21 @@
+{
+  "thread": "Camel (camel-1) thread #6 - file://aXmlFolder",
+  "level": "INFO",
+  "loggerName": "xmlToBean",
+  "message": "ID-YUKA-NOTE-1566703831453-0-2 - <?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n<ACTCDOC xmlns=\"http://www.cip-bancos.org.br/ARQ/ACTC101.xsd\">\r\n  <BCARQ>\r\n    <NomArq>123213</NomArq>\r\n    <NumCtrlEmis>22</NumCtrlEmis>\r\n    <ISPBEmissor>12345678</ISPBEmissor>\r\n    <ISPBDestinatario>12345678</ISPBDestinatario>\r\n    <DtHrArq>2019-06-07T10:15:04</DtHrArq>\r\n    <DtRef>2019-06-07</DtRef>\r\n  </BCARQ>\r\n  <SISARQ>\r\n    <ACTC101>\r\n      <Grupo_ACTC101_Portldd>\r\n        <IdentdPartAdmdo>12345678</IdentdPartAdmdo>\r\n        <NumCtrlIF>123213</NumCtrlIF>\r\n        <Grupo_ACTC101_IdentdContrto>\r\n          <CodContrtoOr>0000000000000000000001234567852145211455</CodContrtoOr>\r\n          <CNPJBase_IFOrContrto>12345678</CNPJBase_IFOrContrto>\r\n          <TpContrto>0202</TpContrto>\r\n          <TpEnteCons>1</TpEnteCons>\r\n          <CNPJCorrespBanc>12345678910001</CNPJCorrespBanc>\r\n        </Grupo_ACTC101_IdentdContrto>\r\n        <Grupo_ACTC101_Cli>\r\n          <TpCli>F</TpCli>\r\n          <CNPJ_CPFCli>37262889885</CNPJ_CPFCli>\r\n          <NomCli>Teste</NomCli>\r\n          <TelCli></TelCli>\r\n        </Grupo_ACTC101_Cli>\r\n        <Grupo_ACTC101_PropPortldd>\r\n          <DtRefSaldDevdrContb>2019-06-07</DtRefSaldDevdrContb>\r\n          <VlrSaldDevdrContb>123.34</VlrSaldDevdrContb>\r\n          <TxJurosNoml>1.2</TxJurosNoml>\r\n          <TxJurosEft>5</TxJurosEft>\r\n          <TxCET>1.6</TxCET>\r\n          <CodMoeda>1</CodMoeda>\r\n          <RegmAmtzc>1</RegmAmtzc>\r\n          <DtContrOp>2019-06-07</DtContrOp>\r\n          <QtdTotParclContrto>23</QtdTotParclContrto>\r\n          <VlrFaceParclContrto>12312.69</VlrFaceParclContrto>\r\n          <DtVencPrimParclContrto>2019-06-07</DtVencPrimParclContrto>\r\n          <DtVencUltParclContrto>2022-06-07</DtVencUltParclContrto>\r\n        </Grupo_ACTC101_PropPortldd>\r\n        <Grupo_ACTC101_EndCartaPortldd>\r\n          <LogradEndCartaPortldd>Rua Domelia</LogradEndCartaPortldd>\r\n          <NumEndCartaPortldd>15</NumEndCartaPortldd>\r\n          <CidEndCartaPortldd>São Paulo</CidEndCartaPortldd>\r\n          <UFEndCartaPortldd>SP</UFEndCartaPortldd>\r\n          <CEPEndCartaPortldd>02302100</CEPEndCartaPortldd>\r\n        </Grupo_ACTC101_EndCartaPortldd>\r\n      </Grupo_ACTC101_Portldd>\r\n    </ACTC101>\r\n  </SISARQ>\r\n  <ESTARQ>\r\n  </ESTARQ>\r\n </ACTCDOC>\r\n",
+  "endOfBatch": false,
+  "loggerFqcn": "org.apache.logging.slf4j.Log4jLogger",
+  "instant": {
+    "epochSecond": 1566703837,
+    "nanoOfSecond": 834000000
+  },
+  "contextMap": {
+    "camel.breadcrumbId": "ID-YUKA-NOTE-1566703831453-0-1",
+    "camel.contextId": "camel-1",
+    "camel.exchangeId": "ID-YUKA-NOTE-1566703831453-0-1",
+    "camel.messageId": "ID-YUKA-NOTE-1566703831453-0-2",
+    "camel.routeId": "xmlToBean"
+  },
+  "threadId": 73,
+  "threadPriority": 5
+}

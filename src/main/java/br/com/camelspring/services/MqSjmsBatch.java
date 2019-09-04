@@ -13,7 +13,7 @@ public class MqSjmsBatch extends BaseRouteBuilder {
         super.configure();
 
         CustomCronScheduleRoutePolicy cronPolicy = new CustomCronScheduleRoutePolicy(getContext());
-        cronPolicy.setRouteStartTime("* 59 10 * * ?");
+        cronPolicy.setRouteStartTime("* * * * * ?");
         cronPolicy.setRouteStopTime("* 59 23 * * ?");
         cronPolicy.setTimeZone("America/Sao_Paulo");
 
@@ -24,7 +24,6 @@ public class MqSjmsBatch extends BaseRouteBuilder {
                 .routePolicy(cronPolicy)
                 .transacted()
                 .wireTap("bean:logBean")
-                .log("${body}")
                 //.bean(TestException.class, "testException")
                 .to("{{mqsjms.split}}");
     }

@@ -28,6 +28,7 @@ public class XmlToBeanService extends RouteBuilder {
                 to("mock:error");
 
         from("file:aXmlFolder?delay=5&noop=true").
+                routeId("xmlToBean").
                 log("${id} - ${body}").
                 choice().
                     when(xpath("/ACTCDOC")).

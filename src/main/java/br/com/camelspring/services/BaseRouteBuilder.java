@@ -10,11 +10,11 @@ public abstract class BaseRouteBuilder extends SpringRouteBuilder {
     public void configure() throws Exception {
         errorHandler(transactionErrorHandler()
                 .redeliveryDelay(500L)
-//                .logHandled(true)
+                .logHandled(true)
                 .maximumRedeliveries(2)
                 .backOffMultiplier(2)
                 .useExponentialBackOff()
-                .retryAttemptedLogLevel(LoggingLevel.ERROR)
+                .retryAttemptedLogLevel(LoggingLevel.WARN)
                 .retriesExhaustedLogLevel(LoggingLevel.DEBUG)
                 .logExhaustedMessageBody(true)
                 .logExhaustedMessageHistory(true)
